@@ -21,7 +21,7 @@ public class Database {
 	public Database() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "19007683760091");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "");
 		} catch (Exception e) {
 			StringBuilder err = new StringBuilder(e.toString());
 			for (StackTraceElement s : e.getStackTrace()) {
