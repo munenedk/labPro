@@ -1,58 +1,71 @@
 package pro.lab.mainframe;
 
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class Database {
 	Connection con;
 	Statement stmt;
-	public Database(){	
-		try{
+	PreparedStatement pstmt;
+
+	public Database() {
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","19007683760091");
-			stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		}catch(Exception e){
-			e.printStackTrace();
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "19007683760091");
+		} catch (Exception e) {
+			StringBuilder err = new StringBuilder(e.toString());
+			for (StackTraceElement s : e.getStackTrace()) {
+				err.append("\n");
+				err.append(s);
+			}
+			JTextArea textarea = new JTextArea(err.toString());
+			JScrollPane scrollpane = new JScrollPane(textarea);
+			textarea.setLineWrap(true);
+			textarea.setWrapStyleWord(true);
+			scrollpane.setPreferredSize(new Dimension(300, 150));
+			JOptionPane.showMessageDialog(null, scrollpane, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	
-	public String getUserPassword(String username){
-		ResultSet rs;
-		String pass = "";	
-		try{
-			
-		}catch(Exception e){
-			e.printStackTrace();
+
+	public ArrayList<String[]> getAllCourses() {
+		ResultSet rs; int ncol;
+		ArrayList<String[]> courses = new ArrayList<>();
+		try {
+			pstmt = con.prepareStatement("select * from courses");
+			rs = pstmt.executeQuery();
+			ncol = rs.getMetaData().getColumnCount();
+			while (rs.next()) {
+				String[] row = new String[ncol];
+				
+				for(int icol = 1; icol<=ncol; icol++){
+					row[icol-1] = rs.getObject(icol).toString();
+				}
+				courses.add(row);
+			}
+		} catch (Exception e) {
+			StringBuilder err = new StringBuilder(e.toString());
+			for (StackTraceElement s : e.getStackTrace()) {
+				err.append("\n");
+				err.append(s);
+			}
+			JTextArea textarea = new JTextArea(err.toString());
+			JScrollPane scrollpane = new JScrollPane(textarea);
+			textarea.setLineWrap(true);
+			textarea.setWrapStyleWord(true);
+			scrollpane.setPreferredSize(new Dimension(300, 150));
+			JOptionPane.showMessageDialog(null, scrollpane, "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
-		return pass;
+		return courses;
 	}
-	
-	
-	
-	
-	
-	
-	
-//	public static void main(String[] args) {
-//		
-//		
-//			rs = stmt.executeQuery("select * from courses");
-//			
-//			while(rs.next()){
-//				ResultSetMetaData rsmd = rs.getMetaData();
-//				System.out.print(rsmd.getColumnName(1)+"\t"+rsmd.getColumnName(2)+"\t"+rsmd.getColumnName(3)+"\t"+rsmd.getColumnName(4)
-//				+"\t"+rsmd.getColumnName(5)+"\t"+rsmd.getColumnName(6)+"\t"+rsmd.getColumnName(7)+"\n");
-//				
-//				System.out.print(rs.getString(1)+"\t"+rs.getString(2)+"/t"+rs.getString(3)
-//				+"\t"+rs.getString(4)+"\t"+rs.getString(5)+"\t"+rs.getString(6)+"\t"+rs.getString(7)+"\n");
-//			}
-//			
-//		
-//
-//	}
 
 }

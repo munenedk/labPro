@@ -51,8 +51,12 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
-		btnLogin.setBounds(348, 413, 234, 40);
+		btnLogin.setBounds(461, 415, 121, 40);
 		add(btnLogin);
+		
+		JButton btnDBsettings = new JButton("DB Settings");
+		btnDBsettings.setBounds(348, 415, 104, 40);
+		add(btnDBsettings);
 
 	}
 }
