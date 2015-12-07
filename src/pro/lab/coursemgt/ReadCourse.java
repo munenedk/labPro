@@ -49,7 +49,6 @@ public class ReadCourse extends JPanel {
 				for (String[] item : theCourses) {
 					records.addRow(item);
 				}
-				;
 			}
 		});
 		scrollPanetblCourseList.setBounds(39, 43, 785, 282);
