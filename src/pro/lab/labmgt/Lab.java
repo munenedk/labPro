@@ -22,6 +22,10 @@ public class Lab extends JPanel {
 		labTabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		labTabbedPane.setBounds(3, 3, 860, 545);
 		add(labTabbedPane);
+		
+		CreateLab createLabPanel = new CreateLab();
+		createIcon = new ImageIcon(Lab.class.getResource("/pro/lab/icons/add-icon.png"));
+		labTabbedPane.addTab("Create Lab ", createIcon, createLabPanel, null);
 
 		ReadLab readLabPanel = new ReadLab();
 		readIcon = new ImageIcon(Lab.class.getResource("/pro/lab/icons/read-icon.png"));
@@ -30,10 +34,6 @@ public class Lab extends JPanel {
 		UpdateLab updateLabPanel = new UpdateLab();
 		updateIcon = new ImageIcon(Lab.class.getResource("/pro/lab/icons/edit-icon.png"));
 		labTabbedPane.addTab("Update Labs ", updateIcon, updateLabPanel, null);
-		
-		CreateLab createLabPanel = new CreateLab();
-		createIcon = new ImageIcon(Lab.class.getResource("/pro/lab/icons/add-icon.png"));
-		labTabbedPane.addTab("Create Lab ", createIcon, createLabPanel, null);
 
 		DeleteLab deleteLabPanel = new DeleteLab();
 		deleteIcon = new ImageIcon(Lab.class.getResource("/pro/lab/icons/delete-icon.png"));
