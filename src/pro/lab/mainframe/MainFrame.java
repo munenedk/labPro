@@ -93,15 +93,15 @@ public class MainFrame extends JFrame {
 		courseIcon = new ImageIcon(MainFrame.class.getResource("/pro/lab/icons/course-icon.png"));
 		tabbedPane.addTab(null, courseIcon, course, "Course Management");
 
-		// Lab Management tab - index 2
-		Lab lab = new Lab();
-		labIcon = new ImageIcon(MainFrame.class.getResource("/pro/lab/icons/computer-icon.png"));
-		tabbedPane.addTab(null, labIcon, lab, "Lab Management");
-
-		// Asset Management tab - index 3
+		// Asset Management tab - index 2
 		Asset asset = new Asset();
 		assetIcon = new ImageIcon(MainFrame.class.getResource("/pro/lab/icons/checklist.png"));
 		tabbedPane.addTab(null, assetIcon, asset, "Asset Management");
+
+		// Lab Management tab - index 3
+		Lab lab = new Lab();
+		labIcon = new ImageIcon(MainFrame.class.getResource("/pro/lab/icons/computer-icon.png"));
+		tabbedPane.addTab(null, labIcon, lab, "Lab Management");
 
 		// User Management tab - index 4
 		User user = new User();

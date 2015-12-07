@@ -81,6 +81,22 @@ INSERT INTO `degree` (`degreeID`, `degreeDesc`) VALUES
 /*!40000 ALTER TABLE `degree` ENABLE KEYS */;
 
 
+-- Dumping structure for table mydb.hardwareassets
+CREATE TABLE IF NOT EXISTS `hardwareassets` (
+  `assetID` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `labID` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`assetID`),
+  KEY `HW_ASSET_LAB_FK_idx` (`labID`),
+  CONSTRAINT `HW_ASSET_LAB_FK` FOREIGN KEY (`labID`) REFERENCES `labs` (`labID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mydb.hardwareassets: ~0 rows (approximately)
+/*!40000 ALTER TABLE `hardwareassets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hardwareassets` ENABLE KEYS */;
+
+
 -- Dumping structure for table mydb.labs
 CREATE TABLE IF NOT EXISTS `labs` (
   `labID` varchar(10) NOT NULL,
@@ -92,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `labs` (
   CONSTRAINT `RESOURCE_LABS_FK` FOREIGN KEY (`resourceID`) REFERENCES `resources` (`resourceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mydb.labs: ~7 rows (approximately)
+-- Dumping data for table mydb.labs: ~9 rows (approximately)
 /*!40000 ALTER TABLE `labs` DISABLE KEYS */;
 INSERT INTO `labs` (`labID`, `labName`, `labCapacity`, `resourceID`) VALUES
 	('HW1', 'Hardware Lab', 30, 'HW'),
@@ -101,6 +117,8 @@ INSERT INTO `labs` (`labID`, `labName`, `labCapacity`, `resourceID`) VALUES
 	('LB3', 'Lab 3', 20, 'SPSS'),
 	('LB4', 'Lab 4', 35, 'CMPS'),
 	('LB5', 'Lab 5', 80, 'CMPS'),
+	('LBG', 'Lab General', 30, 'PJ'),
+	('LBG2', 'Lab General 2', 30, 'PJ'),
 	('SW1', 'Software Lab', 30, 'SW');
 /*!40000 ALTER TABLE `labs` ENABLE KEYS */;
 
