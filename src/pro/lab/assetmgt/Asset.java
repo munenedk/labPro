@@ -27,6 +27,11 @@ public class Asset extends JPanel {
 		createIcon = new ImageIcon(Asset.class.getResource("/pro/lab/icons/add-icon.png"));
 		assetTabbedPane.addTab("Create Asset ", createIcon, createAssetPanel, null);
 		createAssetPanel.setLayout(null);
+		
+		CreateAssetGroup createAssetGroupPanel = new CreateAssetGroup();
+		createIcon = new ImageIcon(Asset.class.getResource("/pro/lab/icons/add-icon.png"));
+		assetTabbedPane.addTab("Create Asset Group", createIcon, createAssetGroupPanel, null);
+		createAssetPanel.setLayout(null);
 
 		ReadAsset readAssetPanel = new ReadAsset();
 		readIcon = new ImageIcon(Asset.class.getResource("/pro/lab/icons/read-icon.png"));

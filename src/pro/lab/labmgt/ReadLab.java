@@ -10,6 +10,8 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ReadLab extends JPanel {
 
@@ -20,6 +22,7 @@ public class ReadLab extends JPanel {
 	private JTable tableLabDetails;
 	private JTextField txtSearch;
 	private JTable tableHardwareAssets;
+	private JTable tableSoftwareAssets;
 
 	/**
 	 * Create the panel.
@@ -38,7 +41,7 @@ public class ReadLab extends JPanel {
 		add(lblLabDetails);
 		
 		JScrollPane scrollPaneLabDetails = new JScrollPane();
-		scrollPaneLabDetails.setBounds(23, 50, 381, 191);
+		scrollPaneLabDetails.setBounds(23, 50, 381, 171);
 		add(scrollPaneLabDetails);
 		
 		tableLabDetails = new JTable();
@@ -80,6 +83,10 @@ public class ReadLab extends JPanel {
 		txtSearch.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnSearch.setBounds(28, 371, 90, 28);
 		add(btnSearch);
 		
@@ -94,7 +101,7 @@ public class ReadLab extends JPanel {
 		add(btnDelete);
 		
 		JScrollPane scrollPaneHardwareAssets = new JScrollPane();
-		scrollPaneHardwareAssets.setBounds(446, 52, 383, 187);
+		scrollPaneHardwareAssets.setBounds(446, 52, 383, 171);
 		add(scrollPaneHardwareAssets);
 		
 		tableHardwareAssets = new JTable();
@@ -127,8 +134,36 @@ public class ReadLab extends JPanel {
 		
 		JLabel lblSoftwareAssets = new JLabel("Software Assets");
 		lblSoftwareAssets.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblSoftwareAssets.setBounds(588, 266, 115, 16);
+		lblSoftwareAssets.setBounds(588, 235, 115, 16);
 		add(lblSoftwareAssets);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(461, 283, 369, 178);
+		add(scrollPane);
+		
+		tableSoftwareAssets = new JTable();
+		tableSoftwareAssets.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Asset ID", "Description", "License Type"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		tableSoftwareAssets.getColumnModel().getColumn(2).setPreferredWidth(99);
+		scrollPane.setViewportView(tableSoftwareAssets);
 		
 	}
 }
