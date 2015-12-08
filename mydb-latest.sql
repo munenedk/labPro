@@ -116,26 +116,11 @@ INSERT INTO `labs` (`labID`, `labName`, `labCapacity`, `resourceID`) VALUES
 	('LB2', 'Lab 2', 25, 'CMPS'),
 	('LB3', 'Lab 3', 20, 'SPSS'),
 	('LB4', 'Lab 4', 35, 'CMPS'),
-	('LB5', 'Lab 5', 80, 'CMPS'),
+	('LB5', 'Lab 5', 80, 'PJ'),
 	('LBG', 'Lab General', 30, 'PJ'),
 	('LBG2', 'Lab General 2', 30, 'PJ'),
 	('SW1', 'Software Lab', 30, 'SW');
 /*!40000 ALTER TABLE `labs` ENABLE KEYS */;
-
-
--- Dumping structure for table mydb.machines
-CREATE TABLE IF NOT EXISTS `machines` (
-  `machineID` varchar(10) NOT NULL,
-  `labID` varchar(10) DEFAULT NULL,
-  `comments` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`machineID`),
-  KEY `MACHINE_LAB_FK_idx` (`labID`),
-  CONSTRAINT `MACHINE_LAB_FK` FOREIGN KEY (`labID`) REFERENCES `labs` (`labID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table mydb.machines: ~0 rows (approximately)
-/*!40000 ALTER TABLE `machines` DISABLE KEYS */;
-/*!40000 ALTER TABLE `machines` ENABLE KEYS */;
 
 
 -- Dumping structure for table mydb.prerequisite
@@ -153,6 +138,21 @@ INSERT INTO `prerequisite` (`prerequisiteID`, `prerequisiteDesc`) VALUES
 	('BEGINRMTH', 'MTH Placement,MTH1105'),
 	('GENIT', 'IST1020');
 /*!40000 ALTER TABLE `prerequisite` ENABLE KEYS */;
+
+
+-- Dumping structure for table mydb.resourcegroups
+CREATE TABLE IF NOT EXISTS `resourcegroups` (
+  `resourceID` varchar(10) NOT NULL,
+  `assetID` varchar(10) NOT NULL,
+  PRIMARY KEY (`resourceID`,`assetID`),
+  KEY `RG_SOFTWARE_ASSETS_FK_idx` (`assetID`),
+  CONSTRAINT `RG_RESOURCES_FK` FOREIGN KEY (`resourceID`) REFERENCES `resources` (`resourceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `RG_SOFTWARE_ASSETS_FK` FOREIGN KEY (`assetID`) REFERENCES `softwareassets` (`assetID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mydb.resourcegroups: ~0 rows (approximately)
+/*!40000 ALTER TABLE `resourcegroups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resourcegroups` ENABLE KEYS */;
 
 
 -- Dumping structure for table mydb.resources
@@ -194,6 +194,38 @@ CREATE TABLE IF NOT EXISTS `schedule` (
 -- Dumping data for table mydb.schedule: ~0 rows (approximately)
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
+
+
+-- Dumping structure for table mydb.softwareassets
+CREATE TABLE IF NOT EXISTS `softwareassets` (
+  `assetID` varchar(10) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `labID` varchar(45) DEFAULT NULL,
+  `licenseType` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`assetID`),
+  KEY `LAB_SOFTWARE_FK_idx` (`labID`),
+  CONSTRAINT `LAB_SOFTWARE_FK` FOREIGN KEY (`labID`) REFERENCES `labs` (`labID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mydb.softwareassets: ~0 rows (approximately)
+/*!40000 ALTER TABLE `softwareassets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `softwareassets` ENABLE KEYS */;
+
+
+-- Dumping structure for table mydb.statuslog
+CREATE TABLE IF NOT EXISTS `statuslog` (
+  `logID` int(11) NOT NULL AUTO_INCREMENT,
+  `comments` varchar(200) DEFAULT NULL,
+  `dateEntered` date DEFAULT NULL,
+  `assetID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`logID`),
+  KEY `STATUS_LOG_HWASSETS_FK_idx` (`assetID`),
+  CONSTRAINT `STATUS_LOG_HWASSETS_FK` FOREIGN KEY (`assetID`) REFERENCES `hardwareassets` (`assetID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mydb.statuslog: ~0 rows (approximately)
+/*!40000 ALTER TABLE `statuslog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statuslog` ENABLE KEYS */;
 
 
 -- Dumping structure for table mydb.times

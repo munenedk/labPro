@@ -74,12 +74,12 @@ public class CreateAsset extends JPanel {
 		add(txtSWAssetIdentifier);
 		txtSWAssetIdentifier.setColumns(10);
 
-		JLabel lblAssetGroup = new JLabel("Asset Group");
+		JLabel lblAssetGroup = new JLabel("Asset Description");
 		lblAssetGroup.setBounds(433, 103, 132, 16);
 		add(lblAssetGroup);
 
 		txtSWAssetGroup = new JTextField();
-		txtSWAssetGroup.setBounds(577, 96, 237, 28);
+		txtSWAssetGroup.setBounds(577, 88, 237, 28);
 		add(txtSWAssetGroup);
 		txtSWAssetGroup.setColumns(10);
 
@@ -97,11 +97,11 @@ public class CreateAsset extends JPanel {
 		txtHWAssetQuantity.setColumns(10);
 		
 		JLabel lblLicenseType = new JLabel("License Type");
-		lblLicenseType.setBounds(433, 146, 132, 16);
+		lblLicenseType.setBounds(433, 140, 132, 16);
 		add(lblLicenseType);
 		
 		txtLicenseType = new JTextField();
-		txtLicenseType.setBounds(579, 140, 235, 28);
+		txtLicenseType.setBounds(579, 134, 235, 28);
 		add(txtLicenseType);
 		txtLicenseType.setColumns(10);
 
