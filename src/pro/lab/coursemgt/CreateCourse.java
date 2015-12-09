@@ -123,7 +123,7 @@ public class CreateCourse extends JPanel {
 				ArrayList<String[]> prerequisites = controller.loadCoursePrerequisites();
 				List<String> thePrereqs = new ArrayList<String>();
 				for (String[] prerequisite : prerequisites) {
-					thePrereqs.add(prerequisite[1]);
+					thePrereqs.add(prerequisite[0]);
 				}
 				comboPrerequisites.setModel(new DefaultComboBoxModel(thePrereqs.toArray()));
 			}
@@ -217,7 +217,7 @@ public class CreateCourse extends JPanel {
 				ArrayList<String[]> resources = controller.loadCourseResources();
 				List<String> theResources = new ArrayList<String>();
 				for (String[] resource : resources) {
-					theResources.add(resource[1]);
+					theResources.add(resource[0]);
 				}
 				comboResource.setModel(new DefaultComboBoxModel(theResources.toArray()));
 			}

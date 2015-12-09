@@ -262,6 +262,8 @@ public class Database {
 
 		pstmt = null;
 		try {
+			pstmt = con.prepareStatement("TRUNCATE TABLE schedule");
+			pstmt.executeUpdate();
 			pstmt = con.prepareStatement("INSERT INTO schedule(courseID, labID, timeID, dayID) values(?,?,?,?)");
 			pstmt.setString(1, courseID);
 			pstmt.setString(2, labID);

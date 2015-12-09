@@ -33,10 +33,11 @@ CREATE TABLE IF NOT EXISTS `courses` (
   CONSTRAINT `COURSE_RESC_FK` FOREIGN KEY (`resourceID`) REFERENCES `resources` (`resourceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mydb.courses: ~8 rows (approximately)
+-- Dumping data for table mydb.courses: ~9 rows (approximately)
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
 INSERT INTO `courses` (`courseID`, `courseDesc`, `expectedCapacity`, `program`, `prerequisiteID`, `resourceID`, `degreeID`) VALUES
 	('BUS1010', 'Introduction to Business Organizations', 50, 'UNDG', '0', 'PJ', 'IST'),
+	('BUS1515', 'Business Management', 30, 'UNDG', 'BEGINRIT', 'PJ', 'APT'),
 	('COM1500', 'Intercultural Communication', 50, 'UNDG', '0', 'PJ', 'IST'),
 	('FYE1010', 'First Year Experience', 50, 'UNDG', '0', 'PJ', 'IST'),
 	('HUM1000', 'Word Civilization', 50, 'UNDG', '0', 'PJ', 'IST'),
@@ -83,17 +84,20 @@ INSERT INTO `degree` (`degreeID`, `degreeDesc`) VALUES
 
 -- Dumping structure for table mydb.hardwareassets
 CREATE TABLE IF NOT EXISTS `hardwareassets` (
-  `assetID` int(11) NOT NULL AUTO_INCREMENT,
+  `assetID` varchar(10) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   `labID` varchar(10) DEFAULT NULL,
+  `quantity` int(10) DEFAULT NULL,
   PRIMARY KEY (`assetID`),
   KEY `HW_ASSET_LAB_FK_idx` (`labID`),
   CONSTRAINT `HW_ASSET_LAB_FK` FOREIGN KEY (`labID`) REFERENCES `labs` (`labID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mydb.hardwareassets: ~0 rows (approximately)
+-- Dumping data for table mydb.hardwareassets: ~1 rows (approximately)
 /*!40000 ALTER TABLE `hardwareassets` DISABLE KEYS */;
+INSERT INTO `hardwareassets` (`assetID`, `description`, `status`, `labID`, `quantity`) VALUES
+	('AD1', 'Arduino Uno', 'OKAY', 'HW1', 10);
 /*!40000 ALTER TABLE `hardwareassets` ENABLE KEYS */;
 
 
@@ -189,10 +193,12 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   CONSTRAINT `SCHEDULE_DAYS_FK` FOREIGN KEY (`dayID`) REFERENCES `days` (`dayID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `SCHEDULE_LABS_FK` FOREIGN KEY (`labID`) REFERENCES `labs` (`labID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `SCHEDULE_TIMES_FK` FOREIGN KEY (`timeID`) REFERENCES `times` (`timeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mydb.schedule: ~0 rows (approximately)
+-- Dumping data for table mydb.schedule: ~1 rows (approximately)
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
+INSERT INTO `schedule` (`scheduleID`, `courseID`, `labID`, `timeID`, `dayID`) VALUES
+	(1, 'HUM1000', 'LB5', 'LateNight', 'TR');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 
 
@@ -207,8 +213,10 @@ CREATE TABLE IF NOT EXISTS `softwareassets` (
   CONSTRAINT `LAB_SOFTWARE_FK` FOREIGN KEY (`labID`) REFERENCES `labs` (`labID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mydb.softwareassets: ~0 rows (approximately)
+-- Dumping data for table mydb.softwareassets: ~1 rows (approximately)
 /*!40000 ALTER TABLE `softwareassets` DISABLE KEYS */;
+INSERT INTO `softwareassets` (`assetID`, `description`, `labID`, `licenseType`) VALUES
+	('MWORD', 'Microsoft Word', 'SW1', 'Proprietary');
 /*!40000 ALTER TABLE `softwareassets` ENABLE KEYS */;
 
 
@@ -217,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `statuslog` (
   `logID` int(11) NOT NULL AUTO_INCREMENT,
   `comments` varchar(200) DEFAULT NULL,
   `dateEntered` date DEFAULT NULL,
-  `assetID` int(11) DEFAULT NULL,
+  `assetID` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`logID`),
   KEY `STATUS_LOG_HWASSETS_FK_idx` (`assetID`),
   CONSTRAINT `STATUS_LOG_HWASSETS_FK` FOREIGN KEY (`assetID`) REFERENCES `hardwareassets` (`assetID`) ON DELETE NO ACTION ON UPDATE NO ACTION

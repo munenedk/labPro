@@ -2,6 +2,7 @@ package pro.lab.coursemgt;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +31,7 @@ public class ScheduleCourse extends JPanel {
 		btnGenerateSchedule.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				JOptionPane.showMessageDialog(null,"Working");
 				DefaultTableModel records;
 				String schedule_timeID, schedule_dayID;
 				ArrayList<String[]> existingSchedule, allDaysTimes;
@@ -94,7 +96,7 @@ public class ScheduleCourse extends JPanel {
 								}
 								// records.addRow(item);
 							}
-
+							JOptionPane.showMessageDialog(null,"Finished generating schedule");
 						} else {
 							// If expected capacity >= lab capacity then do
 							// sectioning (IST1010A, IST1010B) until expected
