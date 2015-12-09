@@ -34,20 +34,6 @@
   </target>
  
   <target name="test" depends="compile">
-    <junit fork="yes" haltonfailure="true">
-		<classpath>
-    		<path refid="classpath.test" />
-    	     <fileset dir="${lib}">
-				<include name="**/*.jar" />
-			 </fileset>
-		</classpath>
-      <batchtest fork="yes" todir="tres">
-        <formatter type="brief" usefile="false"/>
-        <fileset dir="${test}">
-          <include name="**/*Test*.java"/>
-        </fileset>
-      </batchtest>
-    </junit>
   </target>
  
   <target name="clean" description="clean up" >
