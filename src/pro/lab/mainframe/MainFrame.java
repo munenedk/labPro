@@ -113,6 +113,10 @@ public class MainFrame extends JFrame {
 		reportIcon = new ImageIcon(MainFrame.class.getResource("/pro/lab/icons/report-icon.png"));
 		tabbedPane.addTab(null, reportIcon, report, "Business Intelligence");
 
-		// tabbedPane.removeTabAt(0);
+		tabbedPane.setEnabledAt(1, false);
+		tabbedPane.setEnabledAt(2, false);
+		tabbedPane.setEnabledAt(3, false);
+		tabbedPane.setEnabledAt(4, false);
+		tabbedPane.setEnabledAt(5, false);
 	}
 }

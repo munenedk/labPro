@@ -2,6 +2,7 @@ package pro.lab.assetmgt;
 
 import java.awt.Font;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +13,10 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateAssetGroup extends JPanel {
 	/**
@@ -21,7 +26,7 @@ public class CreateAssetGroup extends JPanel {
 	private JTextField txtHWAssetIdentifier;
 	private JTextField txtHWDescription;
 	private JTable tableAvailableSWAssets;
-
+	AssetController controller = new AssetController();
 
 	/**
 	 * Create the panel.
@@ -97,9 +102,21 @@ public class CreateAssetGroup extends JPanel {
 		lblNewLabel.setBounds(25, 156, 132, 16);
 		add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(169, 151, 170, 28);
-		add(comboBox);
+		JComboBox<String> comboBoxAvailableSoftwares = new JComboBox<String>();
+		comboBoxAvailableSoftwares.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ArrayList<String[]> softs = controller.loadSoftwareAssets();;
+				List<String> thesoft = new ArrayList<String>();
+				for (String[] soft : softs) {
+					thesoft.add(soft[0]);
+				}
+				comboBoxAvailableSoftwares.setModel(new DefaultComboBoxModel(thesoft.toArray()));
+			}
+		});
+		comboBoxAvailableSoftwares.setBounds(169, 151, 170, 28);
+		add(comboBoxAvailableSoftwares);
 		
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.setBounds(349, 150, 64, 28);

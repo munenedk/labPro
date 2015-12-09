@@ -6,10 +6,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import pro.lab.mainframe.MainFrame;
 
 public class Login extends JPanel {
 	/**
@@ -47,16 +50,31 @@ public class Login extends JPanel {
 		
 		JButton btnLogin = new JButton("Log in");
 		btnLogin.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				String username;
+				
+				username = txtUsername.getText().trim();
+				String pass = new String(txtPassword.getPassword());
+				
+				if(username.equalsIgnoreCase("ADMIN")){
+					if(pass.equals("ADMIN")){
+						MainFrame.tabbedPane.setEnabledAt(1, true);
+						MainFrame.tabbedPane.setEnabledAt(2, true);
+						MainFrame.tabbedPane.setEnabledAt(3, true);
+						MainFrame.tabbedPane.setEnabledAt(4, true);
+						MainFrame.tabbedPane.setEnabledAt(5, true);
+						MainFrame.tabbedPane.setSelectedIndex(1);;
+					} else{
+						JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
+					}
+				}
+				
 			}
 		});
-		btnLogin.setBounds(461, 415, 121, 40);
+		btnLogin.setBounds(348, 415, 234, 40);
 		add(btnLogin);
-		
-		JButton btnDBsettings = new JButton("DB Settings");
-		btnDBsettings.setBounds(348, 415, 104, 40);
-		add(btnDBsettings);
 
 	}
 }

@@ -19,17 +19,17 @@ public class UpdateCourse extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtCourseCode;
-	private JTextField txtCourseName;
-	private JTextField txtExpectedCapacity;
+	protected JTextField txtCourseCode;
+	protected JTextField txtCourseName;
+	protected JTextField txtExpectedCapacity;
 	private JLabel lblProgram;
 	private final ButtonGroup prereqButtonGroup = new ButtonGroup();
 	private final ButtonGroup PrereqListedbuttonGroup = new ButtonGroup();
 	private final ButtonGroup ResourceListedbuttonGroup = new ButtonGroup();
-	private JTextField txtPrereqID;
-	private JTextField txtPrerequisites;
-	private JTextField txtResourceID;
-	private JTextField txtResources;
+	protected JTextField txtPrereqID;
+	protected JTextField txtPrerequisites;
+	protected JTextField txtResourceID;
+	protected JTextField txtResources;
 
 	/**
 	 * Create the panel.
@@ -136,10 +136,12 @@ setLayout(null);
 		add(rdbtnPrereqListedNo);
 		
 		JLabel lblPrerequisiteIdentifier = new JLabel("Prerequisite Identifier");
+		lblPrerequisiteIdentifier.setEnabled(false);
 		lblPrerequisiteIdentifier.setBounds(459, 46, 132, 16);
 		add(lblPrerequisiteIdentifier);
 		
 		txtPrereqID = new JTextField();
+		txtPrereqID.setEnabled(false);
 		txtPrereqID.setBounds(603, 40, 237, 28);
 		add(txtPrereqID);
 		txtPrereqID.setColumns(10);
@@ -168,6 +170,7 @@ setLayout(null);
 		add(rdbtnNo);
 		
 		JLabel lblPrerequisites = new JLabel("Prerequisites");
+		lblPrerequisites.setEnabled(false);
 		lblPrerequisites.setBounds(459, 86, 132, 16);
 		add(lblPrerequisites);
 		
@@ -176,6 +179,7 @@ setLayout(null);
 		add(btnSaveDetails);
 		
 		txtPrerequisites = new JTextField();
+		txtPrerequisites.setEnabled(false);
 		txtPrerequisites.setBounds(603, 80, 237, 28);
 		add(txtPrerequisites);
 		txtPrerequisites.setColumns(10);
@@ -190,19 +194,23 @@ setLayout(null);
 		add(lblResourceDetails);
 		
 		JLabel lblResourceIdentifier = new JLabel("Resource Identifier");
+		lblResourceIdentifier.setEnabled(false);
 		lblResourceIdentifier.setBounds(459, 268, 132, 16);
 		add(lblResourceIdentifier);
 		
 		txtResourceID = new JTextField();
+		txtResourceID.setEnabled(false);
 		txtResourceID.setBounds(603, 262, 237, 28);
 		add(txtResourceID);
 		txtResourceID.setColumns(10);
 		
 		JLabel lblResources = new JLabel("Resources");
+		lblResources.setEnabled(false);
 		lblResources.setBounds(459, 315, 132, 16);
 		add(lblResources);
 		
 		txtResources = new JTextField();
+		txtResources.setEnabled(false);
 		txtResources.setBounds(603, 309, 237, 28);
 		add(txtResources);
 		txtResources.setColumns(10);

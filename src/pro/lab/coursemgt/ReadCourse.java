@@ -22,6 +22,7 @@ public class ReadCourse extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable tblCourseList;
 	private JTextField txtSearchText;
+	private JButton btnUpdate;
 
 	CourseController controller = new CourseController();
 
@@ -44,7 +45,7 @@ public class ReadCourse extends JPanel {
 				DefaultTableModel records;
 				records = (DefaultTableModel) tblCourseList.getModel();
 				records.setRowCount(0);
-				
+
 				ArrayList<String[]> theCourses = controller.loadCourses();
 				for (String[] item : theCourses) {
 					records.addRow(item);
@@ -84,6 +85,7 @@ public class ReadCourse extends JPanel {
 		add(lblSearchFilter);
 
 		JComboBox<String> comboSearchFilter = new JComboBox<String>();
+		comboSearchFilter.setEnabled(false);
 		comboSearchFilter.setModel(new DefaultComboBoxModel<String>(new String[] { "Course Code", "Course Name",
 				"Expected Capacity", "Program", "Prerequisite", "Resources", "Degree" }));
 		comboSearchFilter.setBounds(155, 378, 169, 28);
@@ -99,6 +101,29 @@ public class ReadCourse extends JPanel {
 		txtSearchText.setColumns(10);
 
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				UpdateCourse ucourse = new UpdateCourse();
+				DefaultTableModel records;
+				records = (DefaultTableModel) tblCourseList.getModel();
+				records.setRowCount(0);
+				// come back here
+				ArrayList<String[]> searchResult = controller
+						.SearchCourse(comboSearchFilter.getSelectedItem().toString(), txtSearchText.getText());
+				int counter = 0;
+				for (String[] item : searchResult) {
+					records.addRow(item);
+					counter++;
+					if (counter == 1) {
+						btnUpdate.setEnabled(true);
+					} else {
+						btnUpdate.setEnabled(false);
+					}
+				}
+
+			}
+		});
 		btnSearch.setBounds(289, 436, 90, 28);
 		add(btnSearch);
 
@@ -107,7 +132,7 @@ public class ReadCourse extends JPanel {
 		lblClickTableTo.setBounds(321, 28, 189, 16);
 		add(lblClickTableTo);
 
-		JButton btnUpdate = new JButton("Update");
+		btnUpdate = new JButton("Update");
 		btnUpdate.setEnabled(false);
 		btnUpdate.setBounds(391, 436, 90, 28);
 		add(btnUpdate);
