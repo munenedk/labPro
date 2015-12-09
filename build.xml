@@ -26,14 +26,6 @@
  
   <target name="compile" depends="init" description="compile">
     <javac srcdir="${src}" destdir="${build}/main"/>
-    <javac srcdir="${test}" destdir="${build}/test">
-      <classpath>
-        <pathelement location="${lib}"/>
-      	<fileset dir="${lib}">
-      		<include name="**/*.jar" />
-      	</fileset>
-      </classpath>
-    </javac>
   </target>
  
   <target name="dist" depends="compile">
